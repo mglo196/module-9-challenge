@@ -1,5 +1,6 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
+
 
 // TODO: Define an interface for the Coordinates object
 
@@ -19,9 +20,11 @@ class weatherObject {
   temperature: number;
   description: string;
   icon: string;
-  date: Dayjs | string;
+  date: typeof dayjs | string;
   humidity: number;
   windSpeed: number;
+
+  
 
   constructor(city: string, temperature: number, description: string, icon: string, date: string, humidity: number, windSpeed: number) {
     this.city = city;
@@ -48,7 +51,7 @@ class WeatherService {
   constructor() {
     this.cityName = "";
     this.baseURL = process.env.API_BASE_URL || 'https://api.openweathermap.org';
-    this.APIKey = process.env.API_KEY || '11035ff7fdba26c94c071a83d308c99e';
+    this.APIKey = process.env.API_KEY || '8f54eafa1540dc8f8ba0838b701912cc';
   }
 
   // TODO: Create fetchLocationData method
@@ -128,34 +131,22 @@ class WeatherService {
   }
   // private async fetchAndDestructureLocationData() {}
   
-  // TODO: Create fetchWeatherData method
-
-  async fetchWeatherData(coordinates: Coordinates): Promise<weatherObject> {
-    const weatherQuery = this.buildWeatherQuery(coordinates);
-    const response = await fetch(weatherQuery);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const weatherData = await response.json();
-    if (!weatherData) {
-      throw new Error('Weather data is undefined');
-    }
-    const currentWeather = weatherData.list[0];
-
-  // private async fetchWeatherData(coordinates: Coordinates) {}
   
   // TODO: Build parseCurrentWeather method
 
-  parseCurrentWeather(response: any): weatherObject {
+  private parseCurrentWeather(response: any): WeatherObject {
     return {
-      city: response.name,
+      city: this.cityName,
       temperature: response.main.temp,
       description: response.weather[0].description,
       icon: response.weather[0].icon,
-      date: dayjs(), // Add the current date or appropriate date
+      date: response.dt,
       humidity: response.main.humidity,
       windSpeed: response.wind.speed,
     };
+  }
+
+
 
 
   // private parseCurrentWeather(response: any) {}
@@ -173,15 +164,52 @@ class WeatherService {
   }
   // private buildForecastArray(currentWeather: Weather, weatherData: any[]) {}
   
-  // TODO: Complete getWeatherForCity method
+// Assuming weatherObject is defined somewhere in your code
+type WeatherObject = {
+  // Define the properties of the weather object here
+  temperature: number;
+  humidity: number;
+  windSpeed: number;
+  // Add other properties as needed
+};
 
-  getWeatherForCity(city: string): Promise < weatherObject > {
+class WeatherService {
+  cityName: string;
+
+  // TODO: Complete getWeatherForCity method
+  getWeatherForCity(city: string): Promise<WeatherObject> {
     this.cityName = city;
-    console.log (city);
-    return this.fetchAndDestructureLocationData().then((coordinates) => this.fetchWeatherData(coordinates));
+    console.log(city);
+
+    return this.fetchAndDestructureLocationData().then((coordinates) => {
+      return this.fetchWeatherData(coordinates);
+    });
   }
-//   // }
+
+  // Placeholder for fetchAndDestructureLocationData method
+  private fetchAndDestructureLocationData(): Promise<{ lat: number; lon: number }> {
+    // Implementation here
+    return Promise.resolve({ lat: 0, lon: 0 }); // Replace with actual implementation
+  }
+
+  // Placeholder for fetchWeatherData method
+  private fetchWeatherData(coordinates: { lat: number; lon: number }): Promise<WeatherObject> {
+    // Implementation here
+    return Promise.resolve({ temperature: 20, humidity: 50, windSpeed: 10 }); // Replace with actual implementation
+  }
   // async getWeatherForCity(city: string) {}
 }
 
 export default new WeatherService();
+    function dayjs(): any {
+      throw new Error("Function not implemented.");
+    }
+
+    function buildForecastArray(weatherData: any, arg1: any) {
+      throw new Error("Function not implemented.");
+    }
+
+    function getWeatherForCity(city: any, string: any) {
+      throw new Error("Function not implemented.");
+    }
+  

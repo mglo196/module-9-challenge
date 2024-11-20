@@ -14,20 +14,42 @@ class City {
   }
 }
 
-import fs from 'fs/promises';
+// Importing specific functions from fs/promises
+import { readFile, writeFile } from 'fs/promises';
+const path = require('path'); 
+
+// Example function to save a city to a JSON file
+async function saveCity(city: City) {
+  try {
+    const filePath = path.join(__dirname, 'cities.json');
+    const data = await readFile(filePath, 'utf-8');
+    const cities = JSON.parse(data || '[]'); // Parse existing data or initialize an empty array
+    cities.push(city); // Add the new city
+    await writeFile(filePath, JSON.stringify(cities, null, 2)); // Write updated data back to the file
+    console.log('City saved successfully.');
+  } catch (error) {
+    console.error('Error saving city:', error);
+  }
+}
+
 
 // TODO: Complete the HistoryService class
 class HistoryService {
-  private async read() {
-    return await fs.readFile('searchHistory.json', {
-      flag: 'a+',
-      encoding: 'utf8',
-    });
+  private filePath: string;
+
+  constructor() {
+    // Set the file path for searchHistory.json
+    this.filePath = path.join(__dirname, 'searchHistory.json');
   }
 
   // TODO: Define a write method that writes the updated cities array to the searchHistory.json file
-  private async write(cities: City[]) {
-    return await fs.writeFile('searchHistory.json', JSON.stringify(cities, null, '\t'));
+  private async write(cities: City[]): Promise<void> {
+    try {
+      await writeFile(this.filePath, JSON.stringify(cities, null, '\t'));
+      console.log('Search history updated successfully.');
+    } catch (error) {
+      console.error('Error writing to search history:', error);
+    }
   }
 
   // TODO: Define a getCities method that reads the cities from the searchHistory.json file and returns them as an array of City objects
