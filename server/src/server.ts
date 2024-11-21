@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
-import express from 'express';
+import express, { Request, Response } from 'express'; // Ensure Request and Response are imported
+import path from 'path'; // Import the path module
 dotenv.config();
 
 // Import the routes
@@ -9,26 +10,19 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 
-// TODO: Serve static files of entire client dist folder
-
+// Serve static files from the client dist folder
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('../client/dist'));
 
 app.use(routes);
 
+// Wildcard route to serve index.html for any unmatched routes
 app.get('*', (_req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
-  });
-
-// TODO: Implement middleware for parsing JSON and urlencoded form data
-
-app.post('/data', (req, res) => {
-    console.log('JSON data:', req.body);
-    res.json(req.body);
 });
 
-// TODO: Implement middleware to connect the routes
+// POST route to handle incoming data
 app.post('/data', (req, res) => {
     console.log('JSON data:', req.body);
     res.json(req.body);
