@@ -1,1 +1,10 @@
-[]
+[
+	{
+		"name": "Seattle",
+		"id": "c54cf14c-ff12-4b91-8205-1843881fed7c"
+	},
+	{
+		"name": "Los Angeles",
+		"id": "d9150c0e-efc8-4144-a4a4-c88e22e17c2c"
+	}
+]
