@@ -1,5 +1,5 @@
 # module-9-challenge
-# 08 Typescript Challenge: Vehicle Builder
+# 09 API Challenge: Weather Dashboard
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
@@ -15,18 +15,20 @@ Table of Contents
 
 ## Description
 
-This Challenge prompts the user to either create a new vehicle or select an existing vehicle. After going through the creation or selection process, the user is able to perform certain actions with the selected vehicle. The user is returned to the actions menu after each action until they decide to exit the application.
+External APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in their context, frequently consuming this data via a server.
+
+This Challenge builds a weather dashboard application that calls the OpenWeather API and renders data in the browser.
 
 
 ## Installation 
 
 Clone the repository:
 
-    git clone https://github.com/mglo196/module-8-challenge
+    git clone https://github.com/mglo196/module-9-challenge
 
 Navigate to the project folder:
 
-    cd module-8-challenge
+    cd module-9-challenge
 
 Install the dependencies:
 
@@ -34,52 +36,47 @@ Install the dependencies:
 
 ## Usage
 
-Download the [Inquirer package](https://www.npmjs.com/package/inquirer). 
-
 The application will be installed by using the following command:
 
 ```bash
-npm start
+npm run build
 ```
 
-Then follow the prompts to select one of the three vehicles and perform actions on it.
+Then deploy the application to Render and enter a given city.
 
 
 ## User Story
 
 ```md
-AS a developer
-I WANT to update an existing application to include additional vehicle types
-SO THAT I am able to comprehend and work with existing code bases.
+AS A traveler
+I WANT to see the weather outlook for multiple cities
+SO THAT I can plan a trip accordingly
 ```
 
 ## Acceptance Criteria
 
 ```md
-GIVEN a command-line application that accepts user input
-WHEN I am prompted to create a new vehicle or existing vehicle
-THEN I can choose between the two options
-WHEN I am prompted to choose the vehicle type during creation
-THEN I can choose between car, truck, and motorbike
-WHEN I am prompted for details about the vehicle
-THEN I can enter the vehicle information
-WHEN I have entered all the vehicle information
-THEN I can use the created vehicle
-WHEN I select an existing vehicle
-THEN I can use the selected existing vehicle
-WHEN I have created a new vehicle or selected an existing vehicle
-THEN I can perform actions with that vehicle
-WHEN I perform an action with a vehicle
-THEN I see the result of the action in the command-line
-WHEN I complete the process of performing an action
-THEN I can perform additional actions until I choose to exit
+GIVEN a weather dashboard with form inputs
+WHEN I search for a city
+THEN I am presented with current and future conditions for that city, and that city is added to the search history
+WHEN I view current weather conditions for that city
+THEN I am presented with the city name, the date, an icon representation of weather conditions, a description of the weather for the icon's `alt` tag, the temperature, the humidity, and the wind speed
+WHEN I view future weather conditions for that city
+THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
+WHEN I click on a city in the search history
+THEN I am again presented with current and future conditions for that city
 ```
 
 ## The Deployment
 
-[The Repo](https://github.com/mglo196/module-8-challenge)
+[The Repo](https://github.com/mglo196/module-9-challenge)
 
-[The Walkthrough Video](https://drive.google.com/file/d/1pnlYuCdxJoeBgpcRL02vIUTruO-LLBlk/view)
+[The Deployed Application](https://module-9-challenge-62j9.onrender.com/)
+
+## Mock Up
+
+![Generated exampleREAD.ME](https://github.com/mglo196/module-9-challenge/blob/9dc3061d4d0b4a8499016f87875cd4b96e92dbd3/Weather%20Dashboard.png) 
+
 
 ## Contributions
 
